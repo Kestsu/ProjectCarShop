@@ -34,9 +34,9 @@ class CarODM {
     return this.model.findById(id);
   }
 
-  public async update(id: string, obj: any): Promise<ICar | null> {
+  public async update(_id: string, obj: any): Promise<ICar | null> {
     return this.model.findByIdAndUpdate(
-      { id },
+      { _id },
       { ...obj },
       { new: true },
     );

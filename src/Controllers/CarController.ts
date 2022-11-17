@@ -32,7 +32,7 @@ export default class CarController {
 
   public async get() {
     const response = await this.service.listCars();
-    return this.res.status(201).json(response);
+    return this.res.status(200).json(response);
   }
 
   public async getById() {
@@ -56,7 +56,7 @@ export default class CarController {
       if (response === null) return this.res.status(404).json({ message: 'Car not found' });
       return this.res.status(200).json(response);
     } catch (error) {
-      return this.res.status(422).json({ message: 'Invalid mongo id' });
+      return this.res.status(422).json(error);
     }
   }
 }

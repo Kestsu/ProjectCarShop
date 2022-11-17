@@ -14,16 +14,14 @@ export default class CarService {
   public async createNewCar(car : ICar) {
     const carODM = new CarODM();
     const response = await carODM.create(car);
-    // console.log(response);
-    
     return this.createCarDomain(response);
   }
 
   public async listCars() {
     const carODM = new CarODM();
     const response = await carODM.findAll();
-    return response;
-    // return this.createCarDomain(response);
+    const resposta = response.map((item: any) => this.createCarDomain(item));
+    return resposta;
   }
 
   public async listCarById(id: string) {
