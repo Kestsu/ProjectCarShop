@@ -1,0 +1,39 @@
+import ICar from '../Interfaces/ICar';
+import CarODM from '../Models/CarODM';
+import Car from '../Domains/Car';
+
+export default class CarService {
+  private createCarDomain(data: ICar | null): Car | null {
+    if (data) {
+      return new Car(
+        data,
+      );
+    }
+    return null;
+  }
+  public async createNewCar(car : ICar) {
+    const carODM = new CarODM();
+    const response = await carODM.create(car);
+    // console.log(response);
+    
+    return this.createCarDomain(response);
+  }
+
+  public async listCars() {
+    const carODM = new CarODM();
+    const response = await carODM.findAll();
+    return response;
+    // return this.createCarDomain(response);
+  }
+
+  public async listCarById(id: string) {
+    const carODM = new CarODM();
+    const response = await carODM.findByID(id);
+    return this.createCarDomain(response);
+  }
+  public async updateCarID(id:string, body: any) {
+    const carODM = new CarODM();
+    const response = await carODM.update(id, body);
+    return this.createCarDomain(response);
+  }
+}
