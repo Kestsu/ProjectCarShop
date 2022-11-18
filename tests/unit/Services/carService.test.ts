@@ -89,6 +89,35 @@ describe('Deveria buscar uma moto', function () {
     expect(result).to.be.deep.equal(outputValue);
   });
 
+  it('Listando todos os carros com SUCESSO', async function () {
+    const arrayReturn: ICar[] = [{
+      id: '6376dd5d8aa434958ebc64e9',
+      model: 'Marea',
+      year: 1992,
+      color: 'Red',
+      status: true,
+      buyValue: 12,
+      doorsQty: 2,
+      seatsQty: 5,
+    }, {
+      id: '6376dd5d8aa434958ebc64e9',
+      model: 'Marea',
+      year: 1992,
+      color: 'Red',
+      status: true,
+      buyValue: 12,
+      doorsQty: 2,
+      seatsQty: 5,
+    }]; 
+    const resposta = arrayReturn.map((item: ICar) => new Car(item));
+    sinon.stub(Model, 'find').resolves(resposta);
+
+    const service = new CarService();
+    const result = await service.listCars();
+
+    expect(result).to.be.deep.equal(resposta);
+  });
+
   afterEach(function () {
     sinon.restore();
   });

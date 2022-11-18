@@ -45,7 +45,7 @@ describe('Deveria buscar uma moto', function () {
   it('Deveria buscar uma moto por id com SUCESSO', async function () {
     const Output: Motorcycle = new Motorcycle({
       id: '6376d5edfd87d69d5fcdd9b2',
-      model: 'Honda Cb 600f',
+      model: 'Honda',
       year: 2005,
       color: 'Yellow',
       status: true,
@@ -60,6 +60,35 @@ describe('Deveria buscar uma moto', function () {
     const result = await service.getMotoById('6376d5edfd87d69d5fcdd9b2');
 
     expect(result).to.be.deep.equal(Output);
+  });
+
+  it('Listando todos os motos com SUCESSO', async function () {
+    const arrayReturn: IMotorcycle[] = [{
+      id: '6376d5edfd87d69d5fcdd9b2',
+      model: 'Honda Cb 600f',
+      year: 2005,
+      color: 'Yellow',
+      status: true,
+      buyValue: 30,
+      category: 'Street',
+      engineCapacity: 600,
+    }, {
+      id: '6376d5edfd87d69d5fcdd9b2',
+      model: 'Honda Cb 600f',
+      year: 2005,
+      color: 'Yellow',
+      status: true,
+      buyValue: 30,
+      category: 'Street',
+      engineCapacity: 600,
+    }]; 
+    const resposta = arrayReturn.map((item: IMotorcycle) => new Motorcycle(item));
+    sinon.stub(Model, 'find').resolves(resposta);
+
+    const service = new MotorcyclesService();
+    const result = await service.getMotoAll();
+
+    expect(result).to.be.deep.equal(resposta);
   });
 
   afterEach(function () {

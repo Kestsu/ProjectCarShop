@@ -20,7 +20,7 @@ export default class CarService {
   public async listCars() {
     const carODM = new CarODM();
     const response = await carODM.findAll();
-    const resposta = response.map((item: any) => this.createCarDomain(item));
+    const resposta = response.map((item: ICar) => this.createCarDomain(item));
     return resposta;
   }
 
