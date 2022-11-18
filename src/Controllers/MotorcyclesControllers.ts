@@ -28,4 +28,20 @@ export default class MotorcyclesController {
     const response = await this.service.createNewMotorcycles(moto);
     return this.res.status(201).json(response);
   }
+
+  public async getAll() {
+    const response = await this.service.getMotoAll();
+    return this.res.status(200).json(response);
+  }
+  public async getById() {
+    const { id } = this.req.params;
+
+    try {
+      const response = await this.service.getMotoById(id);
+      if (response === null) return this.res.status(404).json({ message: 'Motorcycle not found' });
+      return this.res.status(200).json(response);
+    } catch (error) {
+      return this.res.status(422).json({ message: 'Invalid mongo id' });
+    }
+  }
 }
