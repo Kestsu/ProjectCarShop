@@ -1,5 +1,7 @@
 # Car Shop: Um back-end concentrado no cadastro de novos carros/motos e listar eles conforme a necessidade.
 
+Esse projeto possui a aplicação dos princípios de Programação Orientada a Objetos (POO) para a construção de uma API com CRUD para gerenciar uma concessionária de veículos. Isso será feito utilizando o banco de dados MongoDB através do framework do Mongoose.
+
 ## Conhecimento envolvido:
 
 - Typescript 
